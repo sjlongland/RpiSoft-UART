@@ -268,7 +268,8 @@ static ssize_t set_baudrate_callback(struct device* dev, struct device_attribute
 	if (kstrtol(buf, 10, &baudrate) < 0)
 		return -EINVAL;
 		
-	if (baudrate <= 1200 && baudrate >= 19200)	//Lock utopia values ;)
+	/* Lock utopia values ;) */
+	if ((baudrate < 1200) || (baudrate > 19200))
 		return -EINVAL;
 	
 	BAUDRATE=baudrate;
